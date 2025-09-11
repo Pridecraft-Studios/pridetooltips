@@ -15,7 +15,8 @@ def create_pack_metadata(path: Path, description: str, pack_format: int = 37):
         pack_format (int): The format version of the pack.
     """
     mcmeta_content = {
-        "pack": {"pack_format": pack_format, "supported_formats": {"min_inclusive": pack_format, "max_inclusive": 9999},
+        "pack": {"min_format": pack_format, "max_format": 9999,
+                 "pack_format": pack_format, "supported_formats": [pack_format, 9999],
                  "description": description}}
     with path.open("w", encoding="utf-8") as file:
         # noinspection PyTypeChecker
