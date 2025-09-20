@@ -56,7 +56,7 @@ A collection of resource packs that change tooltips to be colorful and/or pride 
 
 If you also want other bits of your UI to be themed with pride,
 
-[![Also%20try PrideGUI](https://badger-api-staging.worldwidepixel.ca/compact?gradientStart=8F004C&gradientEnd=61003D&lineOne=Made%20for&lineTwo=You&colourOne=FFFFFF&colourTwo=FF0066&iconUrl=https://badger-staging.worldwidepixel.ca/badger.png&format=png)](https://modrinth.com/project/pridegui)
+[![Also try PrideGUI](https://badger-api-staging.worldwidepixel.ca/cozy?gradientStart=00122f&gradientEnd=000a22&lineOne=Made%20for&lineTwo=You&colourOne=FFFFFF&colourTwo=6fbeff&iconUrl=https://badger-staging.worldwidepixel.ca/badger.png)](https://modrinth.com/project/pridegui)
 
 [![Join our Discord](https://raw.githubusercontent.com/intergrav/devins-badges/v3/assets/compact/social/discord-plural_46h.png)](https://discord.pridecraft.gay)
 [![github-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/github-plural_46h.png)](https://github.com/Pridecraft-Studios/pridetooltips?tab=readme-ov-file#pride-tooltips)
