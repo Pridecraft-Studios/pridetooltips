@@ -54,7 +54,7 @@ A collection of resource packs that change tooltips to be colorful and/or pride 
 
 ### Pridecraft Studios:
 
-If you also want other bits of your UI to be themed with pride,
+If you also want other bits of your UI to be themed with pride:
 
 [![Also try PrideGUI](https://badger-api-staging.worldwidepixel.ca/cozy?gradientStart=00122f&gradientEnd=000a22&lineOne=Also%20try&lineTwo=PrideGUI&colourOne=FFFFFF&colourTwo=6fbeff&iconUrl=https://files.catbox.moe/cqcxuh.svg)](https://modrinth.com/project/pridegui)
 
