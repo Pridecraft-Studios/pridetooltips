@@ -3,7 +3,7 @@
 #
 # from PIL import Image
 #
-# from util.image_processing import nine_slice_scale
+# from pridexyz.image_processing import nine_slice_scale
 #
 # image = Image.open("./frame_bi.png").convert("RGBA")
 #

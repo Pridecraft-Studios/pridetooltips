@@ -6,6 +6,16 @@ version_file: {pack_name}.zip
 version_version: {pack_version}
 icon_file: {pack_name}.png
 gallery_file: gallery_{pack_name}.png
+gallery_title: Modified Tooltip (Banner)
+gallery_description: Banner showing the modified Tooltip. Cursor texture from the Minecraft Cursor Mod by fishstiz.
+primary_categories: gui themed tweaks
+additional_categories: vanilla-like utility simplistic equipment 16x
+issue_url: https://github.com/Pridecraft-Studios/pridetooltips/issues
+source_url: https://github.com/Pridecraft-Studios/pridetooltips
+discord_url: https://discord.pridecraft.gay/
+license_id: CC-BY-SA-4.0
+org_id_source: tooltip
+version_game_version_cutoff: 24w36a
 ---
 
 # <center>{pack_friendly_name}</center>

@@ -25,4 +25,6 @@ modrinth = ModrinthAPI(
 )
 
 
-print(modrinth.get_organization_projects("jIL2YTOk"))
+loaders = modrinth.get_loaders()
+for loader in loaders:
+    print(f"Loader: {loader['name']}: {loader['supported_project_types']}")

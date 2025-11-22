@@ -10,7 +10,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import requests
 
-from util.modrinth.types import NewProject, DictKV, NewVersion, GalleryImage, ProjectUpdate
+from pridexyz.modrinth.types import NewProject, DictKV, NewVersion, GalleryImage, ProjectUpdate
 
 
 class ModrinthAPIError(Exception):
@@ -23,6 +23,15 @@ class ModrinthAPIError(Exception):
         super().__init__(message)
         self.status_code = status_code
         self.response = response or {}
+
+
+def cut_game_versions_until(cutoff_version: str, versions: List[DictKV]) -> List[DictKV]:
+    result: List[DictKV] = []
+    for version in versions:
+        result.append(version)
+        if version.get("version") == cutoff_version:
+            break
+    return result
 
 
 class ModrinthAPI:
@@ -188,7 +197,10 @@ class ModrinthAPI:
     def get_game_versions(self) -> List[DictKV]:
         return self._request("GET", "/tag/game_version")
 
-    def get_game_versions_until(self, cutoff_version: str = "24w36a") -> List[DictKV]:
+    def get_loaders(self) -> List[DictKV]:
+        return self._request("GET", "/tag/loader")
+
+    def get_game_versions_until(self, cutoff_version: str) -> List[DictKV]:
         versions = self.get_game_versions()
         result: List[DictKV] = []
         for version in versions:

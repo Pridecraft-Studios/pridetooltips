@@ -206,8 +206,8 @@
 	"7clr-full": {
 		"description_name": "7-Color",
 		"explanation": "A simple 7-color flag with seven colors",
-		"version": 1,
-		"expects": 5,
+		"version": 2,
+		"expects": 7,
 		"background": {
 			"before": [
 				"common/background_dark_compose.png"
@@ -240,8 +240,8 @@
 	"7clr-frame": {
 		"description_name": "Frame-only 7-Color",
 		"explanation": "A simple 7-color flag with seven colors. This style only applies the colors to the frame, leaving the background black",
-		"version": 1,
-		"expects": 5,
+		"version": 2,
+		"expects": 7,
 		"background": {
 			"before": [
 				"common/background_dark.png"
@@ -263,8 +263,8 @@
 	"7clr-frame-altbg": {
 		"description_name": "Frame-only Alt-BG 7-Color",
 		"explanation": "A simple 7-color flag with seven colors. This style only applies the colors to the frame, leaving the background as the default Minecraft texture",
-		"version": 1,
-		"expects": 5,
+		"version": 2,
+		"expects": 7,
 		"background": {
 			"before": [
 				"common/background_default.png"

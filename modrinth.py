@@ -7,12 +7,12 @@ from typing import List
 
 import dotenv
 
-from util.logger import get_logger
-from util.markdown import markdown_with_frontmatter_to_dict, appy_modrinth_markdown_template
-from util.modrinth.api import ModrinthAPI, ModrinthAPIError
-from util.modrinth.types import (
+from pridexyz.logger import get_logger
+from pridexyz.markdown import markdown_with_frontmatter_to_dict, appy_modrinth_markdown_template
+from pridexyz.modrinth.api import ModrinthAPI, ModrinthAPIError, cut_game_versions_until
+from pridexyz.modrinth.types import (
     NewProject, ProjectType, SideSupport, ProjectUpdate,
-    GalleryImage, NewVersion, VersionType,
+    GalleryImage, NewVersion, VersionType, DictKV,
 )
 
 logger = get_logger(__name__)
@@ -32,7 +32,7 @@ def load_project_data(project_dir: Path) -> dict:
     if not modrinth_md.is_file():
         logger.warning(f"[{project_dir.name}] Missing 'modrinth.md' file.")
         return {}
-    logger.info(f"[{project_dir.name}] Found 'modrinth.md'.")
+    logger.debug(f"[{project_dir.name}] Found 'modrinth.md'.")
     return markdown_with_frontmatter_to_dict(modrinth_md)
 
 
@@ -66,6 +66,13 @@ def fetch_org_projects(modrinth_api: ModrinthAPI, org_id: str) -> dict:
         logger.error(f"Failed to fetch organization projects: {e}", exc_info=True)
         return {}
 
+def fetch_org_projects_from_lookup(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> dict:
+    projects = {}
+    for org_name, org_id in org_id_lookup.items():
+        projects.update(fetch_org_projects(modrinth_api, org_id))
+
+    return projects
+
 
 def handle_files_and_project_data(project_dir: Path) -> dict | None:
     project_data = load_project_data(project_dir)
@@ -83,7 +90,7 @@ def handle_files_and_project_data(project_dir: Path) -> dict | None:
 
 
 def do_for_each_project(org_projects, action_fn, skip_if_exists=False, skip_if_missing=False, log_queue_msg=None, all_org_mode=False):
-    """ Helper to deduplicate the project iteration logic for create/update/publish """
+    """ Helper to deduplicate the project iteration pridexyz for create/update/publish """
     results = []
     if all_org_mode:
         project_dirs = {projects['slug']: None for projects in org_projects.values()}
@@ -115,14 +122,14 @@ def do_for_each_project(org_projects, action_fn, skip_if_exists=False, skip_if_m
     return results
 
 
-def check(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+def check(modrinth_api: ModrinthAPI, org_id_lookup) -> None:
     if not verify_build_dir():
         return
 
     start_time = run_task("check")
     total, files_ok, modrinth_ok = 0, 0, 0
 
-    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    org_projects = fetch_org_projects_from_lookup(modrinth_api, org_id_lookup)
 
     for project_dir in iterate_projects():
         total += 1
@@ -148,12 +155,12 @@ def check(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
     log_task_completion("check", start_time)
 
 
-def create(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+def create(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     if not verify_build_dir():
         return
 
     start_time = run_task("create")
-    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    org_projects = fetch_org_projects_from_lookup(modrinth_api, org_id_lookup)
 
     def make_create_function(project_dir, project_data, _):
         slug = project_data["slug"]
@@ -171,8 +178,8 @@ def create(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
                         body="......",
                         client_side=SideSupport.REQUIRED,
                         server_side=SideSupport.UNSUPPORTED,
-                        organization_id=modrinth_org_id,
-                        license_id="CC-BY-SA-4.0"
+                        organization_id=org_id_lookup[project_data["org_id_source"]],
+                        license_id=project_data["license_id"],
                     ),
                     icon_path=project_dir / project_data["icon_file"]
                 )
@@ -202,9 +209,9 @@ def create(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
 
     log_task_completion("create", start_time)
 
-def update_gallery(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+def update_gallery(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     start_time = run_task("update_gallery")
-    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    org_projects = fetch_org_projects_from_lookup(modrinth_api, org_id_lookup)
 
     def make_update_gallery(project_dir, project_data, project):
         slug = project_data["slug"]
@@ -233,8 +240,8 @@ def update_gallery(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
                         image_path=gallery_file,
                         ext=gallery_file.suffix.lstrip("."),
                         featured=True,
-                        title="Modified Tooltip (Banner)",
-                        description="Banner showing the modified Tooltip. Cursor texture from the Minecraft Cursor Mod by fishstiz."
+                        title=project_data["gallery_title"],
+                        description=project_data["gallery_description"],
                     )
                 )
 
@@ -257,9 +264,9 @@ def update_gallery(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
     log_task_completion("update_gallery", start_time)
 
 
-def update_data(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+def update_data(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     start_time = run_task("update_data")
-    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    org_projects = fetch_org_projects_from_lookup(modrinth_api, org_id_lookup)
 
     def make_update_data(project_dir, project_data, project):
         slug = project_data["slug"]
@@ -284,13 +291,13 @@ def update_data(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
                     ProjectUpdate(
                         title=project_data["name"],
                         description=project_data["summary"],
-                        categories=["gui", "themed", "tweaks"],
-                        additional_categories=["vanilla-like", "utility", "simplistic", "equipment", "16x"],
-                        issues_url="https://github.com/Pridecraft-Studios/pridetooltips/issues",
-                        source_url="https://github.com/Pridecraft-Studios/pridetooltips",
-                        discord_url="https://discord.pridecraft.gay/",
+                        categories=project_data["primary_categories"].split(" "),
+                        additional_categories=project_data["additional_categories"].split(" "),
+                        issues_url=project_data["issue_url"],
+                        source_url=project_data["source_url"],
+                        discord_url=project_data["discord_url"],
                         body=new_body,
-                        license_id="CC-BY-SA-4.0"
+                        license_id=project_data["license_id"],
                     )
                 )
                 logger.info(f"[{dir_name}] Metadata updated successfully.")
@@ -312,9 +319,9 @@ def update_data(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
     log_task_completion("update_data", start_time)
 
 
-def update_body(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+def update_body(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     start_time = run_task("update_body")
-    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    org_projects = fetch_org_projects_from_lookup(modrinth_api, org_id_lookup)
 
     def make_update_data(project_dir, project_data, project):
         slug = project_data["slug"]
@@ -360,9 +367,9 @@ def update_body(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
     log_task_completion("update_body", start_time)
 
 
-def update_icon(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+def update_icon(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     start_time = run_task("update_icon")
-    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    org_projects = fetch_org_projects_from_lookup(modrinth_api, org_id_lookup)
 
     def make_update_icon(project_dir, project_data, project):
         slug = project_data["slug"]
@@ -403,28 +410,28 @@ def update_icon(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
     log_task_completion("update_icon", start_time)
 
 
-def update(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+def update(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     if not verify_build_dir():
         return
 
     match sys.argv[2] if len(sys.argv) > 2 else input("Enter update-subtask: "):
         case "all":
-            update_icon(modrinth_api, modrinth_org_id)
-            update_gallery(modrinth_api, modrinth_org_id)
-            update_data(modrinth_api, modrinth_org_id)
+            update_icon(modrinth_api, org_id_lookup)
+            update_gallery(modrinth_api, org_id_lookup)
+            update_data(modrinth_api, org_id_lookup)
         case "icon":
-            update_icon(modrinth_api, modrinth_org_id)
+            update_icon(modrinth_api, org_id_lookup)
         case "gallery":
-            update_gallery(modrinth_api, modrinth_org_id)
+            update_gallery(modrinth_api, org_id_lookup)
         case "data":
-            update_data(modrinth_api, modrinth_org_id)
+            update_data(modrinth_api, org_id_lookup)
         case "body":
-            update_body(modrinth_api, modrinth_org_id)
+            update_body(modrinth_api, org_id_lookup)
         case _:
             logger.error("Unknown update-subtask")
 
 
-def publish(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+def publish(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     if not verify_build_dir():
         return
 
@@ -441,8 +448,8 @@ def publish(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
         return
 
     start_time = run_task("publish")
-    game_versions = get_game_versions(modrinth_api)
-    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    game_versions = modrinth_api.get_game_versions()
+    org_projects = fetch_org_projects_from_lookup(modrinth_api, org_id_lookup)
 
     def make_publish_fn(project_dir, project_data, project):
         slug = project_data["slug"]
@@ -452,8 +459,11 @@ def publish(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
                 version_name = f"{str(project_data['name']).replace(meta["redundant_removable_info"], "")} {project_data['version_version']}"
                 if len(version_name) > 64:
                     version_name = version_name.replace("Frame-only", "Fr...")
+                if len(version_name) > 64:
                     version_name = version_name.replace("Alt-BG", "A...")
+                if len(version_name) > 64:
                     version_name = version_name.replace("Background/Frame", "B.../Fr...")
+                if len(version_name) > 64:
                     version_name = version_name.replace("Monochrome", "Mono...")
 
                 result = modrinth_api.create_version(
@@ -464,7 +474,7 @@ def publish(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
                         loaders=["minecraft"],
                         version_type=VersionType.RELEASE,
                         dependencies=[],
-                        game_versions=game_versions
+                        game_versions=get_game_versions_until_cutoff(project_data["version_game_version_cutoff"], game_versions),
                     ),
                     [project_dir / project_data["version_file"]],
                     project_data["version_file"]
@@ -498,12 +508,12 @@ def publish(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
 
 
 
-def submit(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+def submit(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     if not verify_build_dir():
         return
 
     start_time = run_task("submit")
-    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    org_projects = fetch_org_projects_from_lookup(modrinth_api, org_id_lookup)
 
     def make_submit_function(project_name, project_data, project):
         def _submit():
@@ -553,17 +563,17 @@ def submit(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
 
 
 
-def get_game_versions(modrinth_api: ModrinthAPI) -> List[str]:
-    cut_versions = modrinth_api.get_game_versions_until("24w36a")
+def get_game_versions_until_cutoff(cutoff_version: str, versions: List[DictKV]) -> List[str]:
+    cut_versions = cut_game_versions_until(cutoff_version, versions)
     return [version["version"] for version in cut_versions]
 
 
-def workspace_1(modrinth_api, modrinth_org_id) -> None:
+def workspace_1(modrinth_api, org_id_lookup) -> None:
     # delete all project folders of projects that have a status other than "draft"
     if not verify_build_dir():
         return
     start_time = run_task("workspace")
-    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    org_projects = fetch_org_projects_from_lookup(modrinth_api, org_id_lookup)
     deleted_count = 0
     for project_dir in iterate_projects():
         project_data = load_project_data(project_dir)
@@ -595,12 +605,12 @@ def workspace_1(modrinth_api, modrinth_org_id) -> None:
     log_task_completion("workspace", start_time)
 
 
-def workspace_2(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
+def workspace_2(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     # delete all project folders that already have their current version published on Modrinth
     if not verify_build_dir():
         return
     start_time = run_task("workspace_2")
-    org_projects = fetch_org_projects(modrinth_api, modrinth_org_id)
+    org_projects = fetch_org_projects_from_lookup(modrinth_api, org_id_lookup)
     deleted_count = 0
 
     for project_dir in iterate_projects():
@@ -650,33 +660,50 @@ def workspace_2(modrinth_api: ModrinthAPI, modrinth_org_id: str) -> None:
 def main() -> None:
     modrinth_token = dotenv.get_key(".env", "MODRINTH_TOKEN")
     modrinth_api_url = dotenv.get_key(".env", "MODRINTH_API_URL")
-    modrinth_org_id = dotenv.get_key(".env", "MODRINTH_ORG_ID")
 
-    if not modrinth_token or not modrinth_api_url or not modrinth_org_id:
+    # Load orgs lookup
+    orgs_path = Path('src') / 'orgs.json'
+    logger.info(f"Loading orgs from {orgs_path}")
+    with open(orgs_path, 'r') as orgs_file:
+        orgs_env_lookup = json.load(orgs_file)
+
+    org_id_lookup = {}
+    for org_key, org_env_key in orgs_env_lookup.items():
+        org_id = dotenv.get_key(".env", org_env_key)
+        if org_id:
+            org_id_lookup[org_key] = org_id
+        else:
+            logger.error(f"Missing organization ID for key '{org_env_key}'.")
+            return
+
+    for org_key, org_id in org_id_lookup.items():
+        logger.info(f"'{org_key}' maps to '{org_id}'.")
+
+    if not modrinth_token or not modrinth_api_url:
         logger.error("Missing or incomplete Modrinth configuration in .env file.")
         return
 
     modrinth_api = ModrinthAPI(
         token=modrinth_token,
         api_url=modrinth_api_url,
-        user_agent="Pridecraft-Studios/pridetooltips (daniel+pridetooltips@rotgruengelb.net)"
+        user_agent="Pridecraft-Studios/pridexyz (daniel+pridexyz@rotgruengelb.net)"
     )
 
     match sys.argv[1] if len(sys.argv) > 1 else input("Enter subtask: "):
         case "check":
-            check(modrinth_api, modrinth_org_id)
+            check(modrinth_api, org_id_lookup)
         case "create":
-            create(modrinth_api, modrinth_org_id)
+            create(modrinth_api, org_id_lookup)
         case "update":
-            update(modrinth_api, modrinth_org_id)
+            update(modrinth_api, org_id_lookup)
         case "publish":
-            publish(modrinth_api, modrinth_org_id)
+            publish(modrinth_api, org_id_lookup)
         case "submit":
-            submit(modrinth_api, modrinth_org_id)
+            submit(modrinth_api, org_id_lookup)
         case "workspace_1":
-            workspace_1(modrinth_api, modrinth_org_id)
+            workspace_1(modrinth_api, org_id_lookup)
         case "workspace_2":
-            workspace_2(modrinth_api, modrinth_org_id)
+            workspace_2(modrinth_api, org_id_lookup)
         case _:
             logger.error("Unknown subtask")
 

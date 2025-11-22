@@ -2,11 +2,13 @@
 	"bisexual": {
 		"version": 1,
 		"description_name": "Bisexual Pride Flag",
-		"styles": [
-			"3clr-full",
-			"3clr-frame",
-			"3clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"3clr-full",
+				"3clr-frame",
+				"3clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#d60270",
 			"#9b4f96",
@@ -16,11 +18,13 @@
 	"pansexual": {
 		"version": 1,
 		"description_name": "Pansexual Pride Flag",
-		"styles": [
-			"3clr-full",
-			"3clr-frame",
-			"3clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"3clr-full",
+				"3clr-frame",
+				"3clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#ff1b8d",
 			"#ffd800",
@@ -30,11 +34,13 @@
 	"modrinth": {
 		"version": 1,
 		"description_name": "Modrinth Themed",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#1bd96a"
 		]
@@ -42,11 +48,13 @@
 	"tvtestpattern": {
 		"version": 1,
 		"description_name": "TV Test Pattern Themed",
-		"styles": [
-			"7clr-full",
-			"7clr-frame",
-			"7clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"7clr-full",
+				"7clr-frame",
+				"7clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#c1c1c1",
 			"#c1c109",
@@ -60,11 +68,13 @@
 	"polysexual": {
 		"version": 1,
 		"description_name": "Polysexual Pride Flag",
-		"styles": [
-			"3clr-full",
-			"3clr-frame",
-			"3clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"3clr-full",
+				"3clr-frame",
+				"3clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#F714BA",
 			"#01D66A",
@@ -74,9 +84,11 @@
 	"intersex/0": {
 		"version": 2,
 		"description_name": "Intersex Pride Flag",
-		"styles": [
-			"split-mono-bg-frame"
-		],
+		"tooltip": {
+			"styles": [
+				"split-mono-bg-frame"
+			]
+		},
 		"colors": [
 			"#ffd80b",
 			"#7900aa"
@@ -85,10 +97,12 @@
 	"intersex/1": {
 		"version": 2,
 		"description_name": "Intersex Pride Flag",
-		"styles": [
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#7900aa"
 		]
@@ -96,11 +110,13 @@
 	"gay-mlm/0": {
 		"version": 1,
 		"description_name": "Gay MLM Pride Flag",
-		"styles": [
-			"5clr-full",
-			"5clr-frame",
-			"5clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#018e71",
 			"#99e9c2",
@@ -112,11 +128,13 @@
 	"asexual": {
 		"version": 1,
 		"description_name": "Asexual Pride Flag",
-		"styles": [
-			"4clr-full",
-			"4clr-frame",
-			"4clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"4clr-full",
+				"4clr-frame",
+				"4clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#232323",
 			"#a4a5a4",
@@ -127,11 +145,13 @@
 	"asexual-spectrum": {
 		"version": 1,
 		"description_name": "Asexual Spectrum Pride Flag",
-		"styles": [
-			"4clr-full",
-			"4clr-frame",
-			"4clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"4clr-full",
+				"4clr-frame",
+				"4clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#151847",
 			"#7657ae",
@@ -142,11 +162,13 @@
 	"aromantic": {
 		"version": 1,
 		"description_name": "Aromantic Pride Flag",
-		"styles": [
-			"5clr-full",
-			"5clr-frame",
-			"5clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#3da542",
 			"#a7d379",
@@ -158,11 +180,13 @@
 	"aromantic-spectrum": {
 		"version": 1,
 		"description_name": "Aromantic Spectrum Pride Flag",
-		"styles": [
-			"5clr-full",
-			"5clr-frame",
-			"5clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#3f9f52",
 			"#97cf7c",
@@ -174,11 +198,13 @@
 	"aroace": {
 		"version": 1,
 		"description_name": "Aromantic Asexual Pride Flag",
-		"styles": [
-			"5clr-full",
-			"5clr-frame",
-			"5clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#e28c08",
 			"#eccd0a",
@@ -190,11 +216,13 @@
 	"fiaspec": {
 		"version": 1,
 		"description_name": "Fiaspec Pride Flag",
-		"styles": [
-			"5clr-full",
-			"5clr-frame",
-			"5clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#5f2263",
 			"#b69ed0",
@@ -206,11 +234,13 @@
 	"miaspec": {
 		"version": 1,
 		"description_name": "Miaspec Pride Flag",
-		"styles": [
-			"5clr-full",
-			"5clr-frame",
-			"5clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#2b3b7f",
 			"#c593e5",
@@ -222,11 +252,13 @@
 	"gay-mlm/1": {
 		"version": 1,
 		"description_name": "Gay MLM Pride Flag",
-		"styles": [
-			"7clr-full",
-			"7clr-frame",
-			"7clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"7clr-full",
+				"7clr-frame",
+				"7clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#018e71",
 			"#26ceaa",
@@ -240,11 +272,13 @@
 	"polyamory/0": {
 		"version": 1,
 		"description_name": "Polyamory Pride Flag",
-		"styles": [
-			"5clr-full",
-			"5clr-frame",
-			"5clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#189fd3",
 			"#fabe93",
@@ -256,11 +290,13 @@
 	"genderfluid": {
 		"version": 1,
 		"description_name": "Genderfluid Pride Flag",
-		"styles": [
-			"5clr-full",
-			"5clr-frame",
-			"5clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#ff76a3",
 			"#f5f5f5",
@@ -272,11 +308,13 @@
 	"genderqueer": {
 		"version": 1,
 		"description_name": "Genderqueer Pride Flag",
-		"styles": [
-			"3clr-full",
-			"3clr-frame",
-			"3clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"3clr-full",
+				"3clr-frame",
+				"3clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#b87fd4",
 			"#ffffff",
@@ -286,11 +324,13 @@
 	"lesbian/0": {
 		"version": 1,
 		"description_name": "Lesbian Pride Flag",
-		"styles": [
-			"5clr-full",
-			"5clr-frame",
-			"5clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#d52d00",
 			"#ff9a56",
@@ -302,11 +342,13 @@
 	"lesbian/1": {
 		"version": 1,
 		"description_name": "Lesbian Pride Flag",
-		"styles": [
-			"7clr-full",
-			"7clr-frame",
-			"7clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"7clr-full",
+				"7clr-frame",
+				"7clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#d52d00",
 			"#ef7627",
@@ -320,11 +362,13 @@
 	"transgender/0": {
 		"version": 1,
 		"description_name": "Transgender Pride Flag",
-		"styles": [
-			"5clr-full",
-			"5clr-frame",
-			"5clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#5bcffa",
 			"#f5abb9",
@@ -336,11 +380,13 @@
 	"transgender/1": {
 		"version": 1,
 		"description_name": "Transgender Pride Flag",
-		"styles": [
-			"3clr-full",
-			"3clr-frame",
-			"3clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"3clr-full",
+				"3clr-frame",
+				"3clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#5bcffa",
 			"#f5abb9",
@@ -350,11 +396,13 @@
 	"agender": {
 		"version": 1,
 		"description_name": "Agender Pride Flag",
-		"styles": [
-			"7clr-full",
-			"7clr-frame",
-			"7clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"7clr-full",
+				"7clr-frame",
+				"7clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#232323",
 			"#bababa",
@@ -368,11 +416,13 @@
 	"bigender": {
 		"version": 1,
 		"description_name": "Bigender Pride Flag",
-		"styles": [
-			"7clr-full",
-			"7clr-frame",
-			"7clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"7clr-full",
+				"7clr-frame",
+				"7clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#c982a5",
 			"#edaacb",
@@ -386,11 +436,13 @@
 	"blue": {
 		"version": 1,
 		"description_name": "Blue",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#0038a8"
 		]
@@ -398,11 +450,13 @@
 	"orange": {
 		"version": 1,
 		"description_name": "Orange",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#f9ab02"
 		]
@@ -410,11 +464,13 @@
 	"brightgreen": {
 		"version": 1,
 		"description_name": "Bright Green",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#9ff902"
 		]
@@ -422,11 +478,13 @@
 	"red": {
 		"version": 1,
 		"description_name": "Red",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#d52d00"
 		]
@@ -434,11 +492,13 @@
 	"teal/0": {
 		"version": 1,
 		"description_name": "Teal",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#018e71"
 		]
@@ -446,9 +506,11 @@
 	"teal/1": {
 		"version": 1,
 		"description_name": "Teal",
-		"styles": [
-			"split-mono-bg-frame"
-		],
+		"tooltip": {
+			"styles": [
+				"split-mono-bg-frame"
+			]
+		},
 		"colors": [
 			"#00241c",
 			"#018e71"
@@ -457,11 +519,13 @@
 	"green": {
 		"version": 1,
 		"description_name": "Green",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#00ff00"
 		]
@@ -469,11 +533,13 @@
 	"softblue": {
 		"version": 1,
 		"description_name": "Soft Blue",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#7bade2"
 		]
@@ -481,11 +547,13 @@
 	"purple/0": {
 		"version": 1,
 		"description_name": "Purple",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#ac2afc"
 		]
@@ -493,9 +561,11 @@
 	"purple/1": {
 		"version": 1,
 		"description_name": "Purple",
-		"styles": [
-			"split-mono-bg-frame"
-		],
+		"tooltip": {
+			"styles": [
+				"split-mono-bg-frame"
+			]
+		},
 		"colors": [
 			"#230934",
 			"#ac2afc"
@@ -504,11 +574,13 @@
 	"yellow": {
 		"version": 1,
 		"description_name": "Yellow",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#ffd800"
 		]
@@ -516,11 +588,13 @@
 	"darkgray": {
 		"version": 1,
 		"description_name": "Dark Gray",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#232323"
 		]
@@ -528,11 +602,13 @@
 	"black/0": {
 		"version": 1,
 		"description_name": "Black",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#000000"
 		]
@@ -540,9 +616,11 @@
 	"black/1": {
 		"version": 1,
 		"description_name": "Black",
-		"styles": [
-			"split-mono-bg-frame"
-		],
+		"tooltip": {
+			"styles": [
+				"split-mono-bg-frame"
+			]
+		},
 		"colors": [
 			"#000000",
 			"#000000"
@@ -551,11 +629,13 @@
 	"white": {
 		"version": 1,
 		"description_name": "White",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#ffffff"
 		]
@@ -563,9 +643,11 @@
 	"pinkred-blue": {
 		"version": 1,
 		"description_name": "Pink Red, Blue-Frame",
-		"styles": [
-			"split-mono-bg-frame"
-		],
+		"tooltip": {
+			"styles": [
+				"split-mono-bg-frame"
+			]
+		},
 		"colors": [
 			"#2c0518",
 			"#21b1ff"
@@ -574,9 +656,11 @@
 	"sand/0": {
 		"version": 1,
 		"description_name": "Sand Themed",
-		"styles": [
-			"split-mono-bg-frame"
-		],
+		"tooltip": {
+			"styles": [
+				"split-mono-bg-frame"
+			]
+		},
 		"colors": [
 			"#2f2e28",
 			"#eae8ca"
@@ -585,11 +669,13 @@
 	"sand/1": {
 		"version": 1,
 		"description_name": "Sand Themed",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#eae8ca"
 		]
@@ -597,9 +683,11 @@
 	"lavender/0": {
 		"version": 1,
 		"description_name": "Lavender",
-		"styles": [
-			"split-mono-bg-frame"
-		],
+		"tooltip": {
+			"styles": [
+				"split-mono-bg-frame"
+			]
+		},
 		"colors": [
 			"#2c2c3b",
 			"#bbbbf9"
@@ -608,11 +696,13 @@
 	"lavender/1": {
 		"version": 1,
 		"description_name": "Lavender",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#bbbbf9"
 		]
@@ -620,9 +710,11 @@
 	"simple": {
 		"version": 1,
 		"description_name": "Simple",
-		"styles": [
-			"split-mono-bg-frame"
-		],
+		"tooltip": {
+			"styles": [
+				"split-mono-bg-frame"
+			]
+		},
 		"colors": [
 			"#111111",
 			"#c6c6c6"
@@ -631,9 +723,11 @@
 	"gray-simple": {
 		"version": 1,
 		"description_name": "Gray Simple",
-		"styles": [
-			"split-mono-bg-frame"
-		],
+		"tooltip": {
+			"styles": [
+				"split-mono-bg-frame"
+			]
+		},
 		"colors": [
 			"#111111",
 			"#a6a6a6"
@@ -642,11 +736,13 @@
 	"lightpink": {
 		"version": 1,
 		"description_name": "Light Pink",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#f5abb9"
 		]
@@ -654,11 +750,13 @@
 	"magenta": {
 		"version": 1,
 		"description_name": "Magenta",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#ff00ff"
 		]
@@ -666,11 +764,13 @@
 	"cyan": {
 		"version": 1,
 		"description_name": "Cyan",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#00ffff"
 		]
@@ -678,11 +778,13 @@
 	"gray": {
 		"version": 1,
 		"description_name": "Gray",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#808080"
 		]
@@ -690,11 +792,13 @@
 	"lightgray": {
 		"version": 1,
 		"description_name": "Light Gray",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#bababa"
 		]
@@ -702,11 +806,13 @@
 	"navy": {
 		"version": 1,
 		"description_name": "Navy Blue",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#000080"
 		]
@@ -714,11 +820,13 @@
 	"raspberry": {
 		"version": 1,
 		"description_name": "Raspberry Red",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#FE6A6A"
 		]
@@ -726,11 +834,13 @@
 	"pastelrose": {
 		"version": 1,
 		"description_name": "Pastel Rose Red",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#ed91b6"
 		]
@@ -738,11 +848,13 @@
 	"babypink": {
 		"version": 1,
 		"description_name": "Baby Pink",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#ffd7fc"
 		]
@@ -750,11 +862,13 @@
 	"lilac": {
 		"version": 1,
 		"description_name": "Lilac",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#df93ff"
 		]
@@ -762,11 +876,13 @@
 	"duckegggray": {
 		"version": 1,
 		"description_name": "Duck Egg Gray",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#bee1e3"
 		]
@@ -774,11 +890,13 @@
 	"smokeblue": {
 		"version": 1,
 		"description_name": "Smoke Blue",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#c3c2e2"
 		]
@@ -786,11 +904,13 @@
 	"mintgreen": {
 		"version": 1,
 		"description_name": "Mint Green",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#a7fcdb"
 		]
@@ -798,11 +918,13 @@
 	"rainbow": {
 		"version": 1,
 		"description_name": "Rainbow",
-		"styles": [
-			"7clr-full",
-			"7clr-frame",
-			"7clr-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"7clr-full",
+				"7clr-frame",
+				"7clr-frame-altbg"
+			]
+		},
 		"colors": [
 			"#fd6d72",
 			"#f0b398",
@@ -816,11 +938,13 @@
 	"seagreen": {
 		"version": 1,
 		"description_name": "Sea Green",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#a6e8aa"
 		]
@@ -828,11 +952,13 @@
 	"peagreen": {
 		"version": 1,
 		"description_name": "Pea Green",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#ccfca6"
 		]
@@ -840,11 +966,13 @@
 	"lemonyellow": {
 		"version": 1,
 		"description_name": "Lemon Yellow",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#f9ff91"
 		]
@@ -852,11 +980,13 @@
 	"apricotorange": {
 		"version": 1,
 		"description_name": "Apricot Orange",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#ead376"
 		]
@@ -864,11 +994,13 @@
 	"peachorange": {
 		"version": 1,
 		"description_name": "Peach Orange",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#fcb96b"
 		]
@@ -876,11 +1008,13 @@
 	"coralorange": {
 		"version": 1,
 		"description_name": "Coral Orange",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#f1956e"
 		]
@@ -888,11 +1022,13 @@
 	"lightredbrown": {
 		"version": 1,
 		"description_name": "Light Red-Brown",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#997d65"
 		]
@@ -900,11 +1036,13 @@
 	"neptuneblue": {
 		"version": 1,
 		"description_name": "Neptune Blue",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#2E5D9D"
 		]
@@ -912,11 +1050,13 @@
 	"springteal": {
 		"version": 1,
 		"description_name": "Spring Teal",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#0EA7A5"
 		]
@@ -924,11 +1064,13 @@
 	"darkgreen": {
 		"version": 1,
 		"description_name": "Dark Green",
-		"styles": [
-			"mono-full",
-			"mono-frame",
-			"mono-frame-altbg"
-		],
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
 		"colors": [
 			"#006400"
 		]

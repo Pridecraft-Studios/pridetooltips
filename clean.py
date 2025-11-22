@@ -1,9 +1,8 @@
-import logging
 import shutil
 from datetime import datetime
 from pathlib import Path
 
-from util.logger import get_logger
+from pridexyz.logger import get_logger
 
 logger = get_logger(__name__)
 
