@@ -1,4 +1,12 @@
 {
 	"global_version": 3,
-	"redundant_removable_info": " Tooltip"
+	"redundant_removable_info": " Tooltip",
+	"shortenable": {
+		"Frame-only": "Fr...",
+		"Alt-BG": "A...",
+		"Background/Frame": "B.../Fr...",
+		"Monochrome": "Mono...",
+		"Color": "C...",
+		"Turned": "Tu..."
+	}
 }

@@ -457,14 +457,13 @@ def publish(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
         def _wrapped():
             try:
                 version_name = f"{str(project_data['name']).replace(meta["redundant_removable_info"], "")} {project_data['version_version']}"
-                if len(version_name) > 64:
-                    version_name = version_name.replace("Frame-only", "Fr...")
-                if len(version_name) > 64:
-                    version_name = version_name.replace("Alt-BG", "A...")
-                if len(version_name) > 64:
-                    version_name = version_name.replace("Background/Frame", "B.../Fr...")
-                if len(version_name) > 64:
-                    version_name = version_name.replace("Monochrome", "Mono...")
+                for replaceable, replacement in meta.get("shortenable", {}).items():
+                    if len(version_name) > 64:
+                        version_name = version_name.replace(replaceable, replacement)
+                    else:
+                        break
+
+                logger.debug(f"[{project_data['slug']}] Version name: {version_name}")
 
                 result = modrinth_api.create_version(
                     NewVersion(
