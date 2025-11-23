@@ -87,7 +87,7 @@ class ModrinthAPI:
 
         with self._ratelimit_lock:
             if self._ratelimit_remaining > 0:
-                self._log_debug("[RL] Enough remaining — continuing")
+                self._log_debug("[RL] Enough remaining; continuing")
                 return
 
             sleep_time = self._ratelimit_reset
@@ -128,7 +128,7 @@ class ModrinthAPI:
             self._update_ratelimit(response)
 
             response.raise_for_status()
-            self._log_debug("[REQ] Request successful — returning JSON")
+            self._log_debug("[REQ] Request successful; returning JSON")
             return response.json() if response.text else {}
 
         except requests.HTTPError as e:

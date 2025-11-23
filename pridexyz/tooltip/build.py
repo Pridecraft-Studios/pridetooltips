@@ -37,7 +37,7 @@ class TooltipBuilder(Builder):
             style_config = self.styles[style_name]
             self.info(f"Generating for style '{style_name}'", 1)
             if style_config.get("generate_turned_variant", True):
-                auto_sub_styles["turned"] = {"transpose": Transpose.ROTATE_90, "suffix": "-turned",
+                auto_sub_styles["turned"] = {"transpose": Transpose.ROTATE_270, "suffix": "-turned",
                                              "description_name_suffix": " Turned",
                                              "explanation_suffix": ", turned by 90 degrees"}
             for auto_sub_style in auto_sub_styles:
