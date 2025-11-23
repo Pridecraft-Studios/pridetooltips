@@ -125,6 +125,40 @@
 			"#3b1379"
 		]
 	},
+	"nonbinary": {
+		"version": 1,
+		"description_name": "Non-binary Pride Flag",
+		"tooltip": {
+			"styles": [
+				"4clr-full",
+				"4clr-frame",
+				"4clr-frame-altbg"
+			]
+		},
+		"colors": [
+			"#FFF433",
+			"#FFFFFF",
+			"#9B59D0",
+			"#2D2D2D"
+		]
+	},
+	"nonbinary-alt": {
+		"version": 1,
+		"description_name": "Alt Non-binary Pride Flag",
+		"tooltip": {
+			"styles": [
+				"4clr-full",
+				"4clr-frame",
+				"4clr-frame-altbg"
+			]
+		},
+		"colors": [
+			"#FFF433",
+			"#FFF8E7",
+			"#9B59D0",
+			"#2D2D2D"
+		]
+	},
 	"asexual": {
 		"version": 1,
 		"description_name": "Asexual Pride Flag",
@@ -357,6 +391,40 @@
 			"#d162a4",
 			"#b55690",
 			"#a30262"
+		]
+	},
+	"sapphic/0": {
+		"version": 1,
+		"description_name": "Sapphic Pride Flag",
+		"tooltip": {
+			"styles": [
+				"5clr-full",
+				"5clr-frame",
+				"5clr-frame-altbg"
+			]
+		},
+		"colors": [
+			"#fd8caa",
+			"#fbf2fa",
+			"#c86bc6",
+			"#fbf2fa",
+			"#fd8caa"
+		]
+	},
+	"sapphic/1": {
+		"version": 1,
+		"description_name": "Sapphic Pride Flag",
+		"tooltip": {
+			"styles": [
+				"3clr-full",
+				"3clr-frame",
+				"3clr-frame-altbg"
+			]
+		},
+		"colors": [
+			"#fd8caa",
+			"#fbf2fa",
+			"#c86bc6"
 		]
 	},
 	"transgender/0": {
@@ -817,6 +885,20 @@
 			"#000080"
 		]
 	},
+	"lime": {
+		"version": 1,
+		"description_name": "Lime Green",
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
+		"colors": [
+			"#9afda4"
+		]
+	},
 	"raspberry": {
 		"version": 1,
 		"description_name": "Raspberry Red",
@@ -857,6 +939,20 @@
 		},
 		"colors": [
 			"#ffd7fc"
+		]
+	},
+	"pink": {
+		"version": 1,
+		"description_name": "Pink",
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
+		"colors": [
+			"#fd2eb1"
 		]
 	},
 	"lilac": {
@@ -933,6 +1029,26 @@
 			"#78a1ed",
 			"#a78cdc",
 			"#dc8cd8"
+		]
+	},
+	"pride1978": {
+		"version": 1,
+		"description_name": "1978 Pride Flag",
+		"tooltip": {
+			"styles": [
+				"7clr-full",
+				"7clr-frame",
+				"7clr-frame-altbg"
+			]
+		},
+		"colors": [
+			"#fc3b65",
+			"#fe8e7e",
+			"#fdfeb3",
+			"#008f58",
+			"#0ac1c1",
+			"#3e0099",
+			"#8e1c8f"
 		]
 	},
 	"seagreen": {
@@ -1031,6 +1147,20 @@
 		},
 		"colors": [
 			"#997d65"
+		]
+	},
+	"brown": {
+		"version": 1,
+		"description_name": "Brown",
+		"tooltip": {
+			"styles": [
+				"mono-full",
+				"mono-frame",
+				"mono-frame-altbg"
+			]
+		},
+		"colors": [
+			"#b75752"
 		]
 	},
 	"neptuneblue": {
