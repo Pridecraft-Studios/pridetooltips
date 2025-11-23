@@ -10,10 +10,8 @@ import dotenv
 from pridexyz.logger import get_logger
 from pridexyz.markdown import markdown_with_frontmatter_to_dict, appy_modrinth_markdown_template
 from pridexyz.modrinth.api import ModrinthAPI, ModrinthAPIError, cut_game_versions_until
-from pridexyz.modrinth.types import (
-    NewProject, ProjectType, SideSupport, ProjectUpdate,
-    GalleryImage, NewVersion, VersionType, DictKV,
-)
+from pridexyz.modrinth.types import (NewProject, ProjectType, SideSupport, ProjectUpdate, GalleryImage, NewVersion,
+                                     VersionType, DictKV)
 
 logger = get_logger(__name__)
 BUILD_DIR = Path("build")
@@ -66,6 +64,7 @@ def fetch_org_projects(modrinth_api: ModrinthAPI, org_id: str) -> dict:
         logger.error(f"Failed to fetch organization projects: {e}", exc_info=True)
         return {}
 
+
 def fetch_org_projects_from_lookup(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> dict:
     projects = {}
     for org_name, org_id in org_id_lookup.items():
@@ -89,8 +88,8 @@ def handle_files_and_project_data(project_dir: Path) -> dict | None:
     return project_data
 
 
-def do_for_each_project(org_projects, action_fn, skip_if_exists=False, skip_if_missing=False, log_queue_msg=None, all_org_mode=False):
-    """ Helper to deduplicate the project iteration pridexyz for create/update/publish """
+def do_for_each_project(org_projects, action_fn, skip_if_exists=False, skip_if_missing=False, log_queue_msg=None,
+                        all_org_mode=False):
     results = []
     if all_org_mode:
         project_dirs = {projects['slug']: None for projects in org_projects.values()}
@@ -165,34 +164,24 @@ def create(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     def make_create_function(project_dir, project_data, _):
         slug = project_data["slug"]
         dir_name = project_dir.name
+
         def _wrapped():
             try:
                 result = modrinth_api.create_project(
-                    NewProject(
-                        slug=slug,
-                        title=project_data["name"],
-                        description="......",
-                        categories=[],
-                        additional_categories=[],
-                        project_type=ProjectType.RESOURCEPACK,
-                        body="......",
-                        client_side=SideSupport.REQUIRED,
-                        server_side=SideSupport.UNSUPPORTED,
-                        organization_id=org_id_lookup[project_data["org_id_source"]],
-                        license_id=project_data["license_id"],
-                    ),
-                    icon_path=project_dir / project_data["icon_file"]
-                )
+                    NewProject(slug=slug, title=project_data["name"], description="......", categories=[],
+                               additional_categories=[], project_type=ProjectType.RESOURCEPACK, body="......",
+                               client_side=SideSupport.REQUIRED, server_side=SideSupport.UNSUPPORTED,
+                               organization_id=org_id_lookup[project_data["org_id_source"]],
+                               license_id=project_data["license_id"], ),
+                    icon_path=project_dir / project_data["icon_file"])
                 return {"slug": slug, "dir_name": dir_name, "success": True, "result": result}
             except ModrinthAPIError as e:
                 return {"slug": slug, "dir_name": dir_name, "success": False, "ModrinthAPIError": e}
+
         return _wrapped
 
-    to_create = do_for_each_project(
-        org_projects, make_create_function,
-        skip_if_exists=True,
-        log_queue_msg="[{{dir}}]\\t Queued for creation..."
-    )
+    to_create = do_for_each_project(org_projects, make_create_function, skip_if_exists=True,
+                                    log_queue_msg="[{{dir}}]\\t Queued for creation...")
 
     if to_create:
         try:
@@ -208,6 +197,7 @@ def create(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
             logger.error("Failed to create some projects.", exc_info=True)
 
     log_task_completion("create", start_time)
+
 
 def update_gallery(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     start_time = run_task("update_gallery")
@@ -234,16 +224,12 @@ def update_gallery(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
                         logger.debug(traceback.format_exc())
 
                 logger.info(f"[{dir_name}] Adding new gallery image...")
-                modrinth_api.add_gallery_image(
-                    id_or_slug=slug,
-                    image=GalleryImage(
-                        image_path=gallery_file,
-                        ext=gallery_file.suffix.lstrip("."),
-                        featured=True,
-                        title=project_data["gallery_title"],
-                        description=project_data["gallery_description"],
-                    )
-                )
+                modrinth_api.add_gallery_image(id_or_slug=slug, image=GalleryImage(image_path=gallery_file,
+                                                                                   ext=gallery_file.suffix.lstrip("."),
+                                                                                   featured=True,
+                                                                                   title=project_data["gallery_title"],
+                                                                                   description=project_data[
+                                                                                       "gallery_description"], ))
 
                 logger.info(f"[{dir_name}] Gallery updated successfully.")
                 return {"slug": slug, "dir_name": dir_name, "success": True}
@@ -281,25 +267,23 @@ def update_data(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
 
                 refreshed_project = modrinth_api.get_project(slug)
                 gallery_url = refreshed_project["gallery"][0]["url"] if refreshed_project.get("gallery") else None
-                new_body = appy_modrinth_markdown_template(
-                    project_data["body"],
-                    context={"upload_gallery_url": gallery_url}
-                )
+                new_body = appy_modrinth_markdown_template(project_data["body"],
+                                                           context={"upload_gallery_url": gallery_url})
 
-                modrinth_api.modify_project(
-                    refreshed_project["id"],
-                    ProjectUpdate(
-                        title=project_data["name"],
-                        description=project_data["summary"],
-                        categories=project_data["primary_categories"].split(" "),
-                        additional_categories=project_data["additional_categories"].split(" "),
-                        issues_url=project_data["issue_url"],
-                        source_url=project_data["source_url"],
-                        discord_url=project_data["discord_url"],
-                        body=new_body,
-                        license_id=project_data["license_id"],
-                    )
-                )
+                modrinth_api.modify_project(refreshed_project["id"], ProjectUpdate(title=project_data["name"],
+                                                                                   description=project_data["summary"],
+                                                                                   categories=project_data[
+                                                                                       "primary_categories"].split(" "),
+                                                                                   additional_categories=project_data[
+                                                                                       "additional_categories"].split(
+                                                                                       " "),
+                                                                                   issues_url=project_data["issue_url"],
+                                                                                   source_url=project_data[
+                                                                                       "source_url"],
+                                                                                   discord_url=project_data[
+                                                                                       "discord_url"], body=new_body,
+                                                                                   license_id=project_data[
+                                                                                       "license_id"], ))
                 logger.info(f"[{dir_name}] Metadata updated successfully.")
                 return {"slug": slug, "dir_name": dir_name, "success": True}
             except ModrinthAPIError as e:
@@ -335,19 +319,12 @@ def update_body(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
                     return {"slug": slug, "dir_name": dir_name, "success": False, "error": "Missing project"}
 
                 refreshed_project = modrinth_api.get_project(slug)
-                gallery_url  = refreshed_project["gallery"][0]["url"] if refreshed_project.get("gallery") else None
+                gallery_url = refreshed_project["gallery"][0]["url"] if refreshed_project.get("gallery") else None
 
-                new_body = appy_modrinth_markdown_template(
-                    project_data["body"],
-                    context={"upload_gallery_url": gallery_url}
-                )
+                new_body = appy_modrinth_markdown_template(project_data["body"],
+                                                           context={"upload_gallery_url": gallery_url})
 
-                modrinth_api.modify_project(
-                    refreshed_project["id"],
-                    ProjectUpdate(
-                        body=new_body,
-                    )
-                )
+                modrinth_api.modify_project(refreshed_project["id"], ProjectUpdate(body=new_body, ))
                 logger.info(f"[{dir_name}] Body updated successfully.")
                 return {"slug": slug, "dir_name": dir_name, "success": True}
             except ModrinthAPIError as e:
@@ -385,11 +362,8 @@ def update_icon(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
                 refreshed_project = modrinth_api.get_project(slug)
                 icon_file = project_dir / project_data["icon_file"]
 
-                modrinth_api.change_project_icon(
-                    refreshed_project["id"],
-                    icon_path=icon_file,
-                    ext=icon_file.suffix.lstrip(".")
-                )
+                modrinth_api.change_project_icon(refreshed_project["id"], icon_path=icon_file,
+                                                 ext=icon_file.suffix.lstrip("."))
 
                 logger.info(f"[{dir_name}] Icon updated successfully.")
                 return {"slug": slug, "dir_name": dir_name, "success": True}
@@ -454,6 +428,7 @@ def publish(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     def make_publish_fn(project_dir, project_data, project):
         slug = project_data["slug"]
         dir_name = project_dir.name
+
         def _wrapped():
             try:
                 version_name = f"{str(project_data['name']).replace(meta["redundant_removable_info"], "")} {project_data['version_version']}"
@@ -466,28 +441,20 @@ def publish(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
                 logger.debug(f"[{project_data['slug']}] Version name: {version_name}")
 
                 result = modrinth_api.create_version(
-                    NewVersion(
-                        name=version_name,
-                        version_number=project_data["version_version"],
-                        project_id=project["id"],
-                        loaders=["minecraft"],
-                        version_type=VersionType.RELEASE,
-                        dependencies=[],
-                        game_versions=get_game_versions_until_cutoff(project_data["version_game_version_cutoff"], game_versions),
-                    ),
-                    [project_dir / project_data["version_file"]],
-                    project_data["version_file"]
-                )
+                    NewVersion(name=version_name, version_number=project_data["version_version"],
+                               project_id=project["id"], loaders=["minecraft"], version_type=VersionType.RELEASE,
+                               dependencies=[],
+                               game_versions=get_game_versions_until_cutoff(project_data["version_game_version_cutoff"],
+                                                                            game_versions), ),
+                    [project_dir / project_data["version_file"]], project_data["version_file"])
                 return {"slug": slug, "dir_name": dir_name, "success": True, "result": result}
             except ModrinthAPIError as e:
                 return {"slug": slug, "dir_name": dir_name, "success": False, "ModrinthAPIError": e}
+
         return _wrapped
 
-    to_publish = do_for_each_project(
-        org_projects, make_publish_fn,
-        skip_if_missing=True,
-        log_queue_msg="[{dir}] Queued for publish..."
-    )
+    to_publish = do_for_each_project(org_projects, make_publish_fn, skip_if_missing=True,
+                                     log_queue_msg="[{dir}] Queued for publish...")
 
     if to_publish:
         try:
@@ -505,8 +472,6 @@ def publish(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     log_task_completion("publish", start_time)
 
 
-
-
 def submit(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     if not verify_build_dir():
         return
@@ -519,31 +484,24 @@ def submit(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
             try:
                 if not project:
                     logger.warning(f"[{project_name}] Project does not exist or had errors, continuing.")
-                    return {"slug": project_name, "dir_name": project_name, "success": False, "ModrinthAPIError": "Does not exist on Modrinth"}
+                    return {"slug": project_name, "dir_name": project_name, "success": False,
+                            "ModrinthAPIError": "Does not exist on Modrinth"}
                 if project.get("status") == "processing":
                     logger.info(f"[{project_name}] Project already in processing state, skipping.")
                     return {"slug": project_name, "dir_name": project_name, "success": True}
 
                 logger.info(f"[{project_name}] Submitting project...")
-                modrinth_api.modify_project(
-                    project["id"],
-                    ProjectUpdate(
-                        status="processing"
-                    )
-                )
+                modrinth_api.modify_project(project["id"], ProjectUpdate(status="processing"))
                 logger.info(f"[{project_name}] Submitted successfully.")
                 return {"slug": project_name, "dir_name": project_name, "success": True}
             except ModrinthAPIError as e:
                 logger.error(f"[{project_name}] Unexpected error whist submitting: {e}", exc_info=True)
                 return {"slug": project_name, "dir_name": project_name, "success": False, "ModrinthAPIError": e}
+
         return _submit
 
-    to_update = do_for_each_project(
-        org_projects, make_submit_function,
-        skip_if_missing=True,
-        log_queue_msg="[{dir}] Queued for submit...",
-        all_org_mode=True
-    )
+    to_update = do_for_each_project(org_projects, make_submit_function, skip_if_missing=True,
+                                    log_queue_msg="[{dir}] Queued for submit...", all_org_mode=True)
 
     if to_update:
         try:
@@ -559,7 +517,6 @@ def submit(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
             logger.error("Failed to submit some projects.", exc_info=True)
 
     log_task_completion("submit", start_time)
-
 
 
 def get_game_versions_until_cutoff(cutoff_version: str, versions: List[DictKV]) -> List[str]:
@@ -644,9 +601,11 @@ def workspace_2(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
                         item.rmdir()
                 project_dir.rmdir()
                 deleted_count += 1
-                logger.info(f"[{project_dir.name}] Deleted project folder (version {current_version} already published).")
+                logger.info(
+                    f"[{project_dir.name}] Deleted project folder (version {current_version} already published).")
             else:
-                logger.info(f"[{project_dir.name}] Current version {current_version} not published yet, keeping folder.")
+                logger.info(
+                    f"[{project_dir.name}] Current version {current_version} not published yet, keeping folder.")
 
         except ModrinthAPIError as e:
             logger.error(f"[{project_dir.name}] Failed to check versions: {e}", exc_info=True)
@@ -655,10 +614,10 @@ def workspace_2(modrinth_api: ModrinthAPI, org_id_lookup: dict) -> None:
     log_task_completion("workspace_2", start_time)
 
 
-
 def main() -> None:
     modrinth_token = dotenv.get_key(".env", "MODRINTH_TOKEN")
     modrinth_api_url = dotenv.get_key(".env", "MODRINTH_API_URL")
+    modrinth_api_enable_debug_logging = dotenv.get_key(".env", "MODRINTH_API_ENABLE_DEBUG_LOGGING").lower() == "true"
 
     # Load orgs lookup
     orgs_path = Path('src') / 'orgs.json'
@@ -682,11 +641,9 @@ def main() -> None:
         logger.error("Missing or incomplete Modrinth configuration in .env file.")
         return
 
-    modrinth_api = ModrinthAPI(
-        token=modrinth_token,
-        api_url=modrinth_api_url,
-        user_agent="Pridecraft-Studios/pridexyz (daniel+pridexyz@rotgruengelb.net)"
-    )
+    modrinth_api = ModrinthAPI(token=modrinth_token, api_url=modrinth_api_url,
+                               user_agent="Pridecraft-Studios/pridexyz (daniel+pridexyz@rotgruengelb.net)",
+                               enable_debug_logging=modrinth_api_enable_debug_logging)
 
     match sys.argv[1] if len(sys.argv) > 1 else input("Enter subtask: "):
         case "check":
