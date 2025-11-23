@@ -94,7 +94,7 @@
 	"4clr-frame": {
 		"description_name": "Frame-only 4-Color",
 		"explanation": "A simple 4-color flag with four colors. This style only applies the colors to the frame, leaving the background black",
-		"version": 1,
+		"version": 2,
 		"expects": 4,
 		"background": {
 			"before": [
@@ -108,7 +108,7 @@
 				"#00FF00",
 				"#0000FF"
 			],
-			"template": "5color/uniform/frame.png"
+			"template": "4color/uniform/frame.png"
 		}
 	},
 	"4clr-frame-altbg": {
