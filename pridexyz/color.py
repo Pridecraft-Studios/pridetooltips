@@ -6,6 +6,7 @@ from colour.models import RGB_COLOURSPACE_sRGB
 
 OkLabColor = ColourArrayLike
 RGBColor = ColourArrayLike
+PilRGBColor = tuple[int, int, int]
 
 
 def convert_hex_to_rgb(hex_color: str) -> np.ndarray:
@@ -73,3 +74,14 @@ def make_oklab_gradient(colors: list[RGBColor], width: int) -> Image.Image:
     rgb_255 = (rgb * 255).astype(np.uint8)
     img = Image.fromarray(rgb_255.reshape(1, width, 3), mode="RGB")
     return img
+
+
+def pil_rgb_to_float_rgb(rgb: PilRGBColor) -> RGBColor:
+    """Convert PIL RGB (0–255 ints) to colour-science RGB floats."""
+    return np.array(rgb, dtype=float) / 255.0
+
+
+def float_rgb_to_pil_rgb(rgb: RGBColor) -> PilRGBColor:
+    """Convert colour-science RGB floats to PIL RGB ints (0–255)."""
+    # noinspection PyTypeChecker
+    return tuple(int(max(0, min(1, c)) * 255) for c in rgb)

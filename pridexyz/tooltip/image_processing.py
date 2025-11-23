@@ -4,22 +4,11 @@ import numpy as np
 from PIL import ImageFile, Image
 from PIL.Image import Transpose
 
-from pridexyz.color import (RGBColor, convert_hex_to_rgb)
-
-
-def pil_rgb_to_float_rgb(rgb: tuple[int, int, int]) -> RGBColor:
-    """Convert PIL RGB (0–255 ints) to colour-science RGB floats."""
-    return np.array(rgb, dtype=float) / 255.0
-
-
-def float_rgb_to_pil_rgb(rgb: RGBColor) -> tuple[int, int, int]:
-    """Convert colour-science RGB floats to PIL RGB ints (0–255)."""
-    # noinspection PyTypeChecker
-    return tuple(int(max(0, min(1, c)) * 255) for c in rgb)
+from pridexyz.color import (RGBColor, convert_hex_to_rgb, pil_rgb_to_float_rgb, float_rgb_to_pil_rgb)
 
 
 def generate_image_from_template(template_image: ImageFile.ImageFile, old_colors: list[RGBColor],
-        new_colors: list[RGBColor]) -> Image.Image:
+                                 new_colors: list[RGBColor]) -> Image.Image:
     """
     Create a new PNG image based on an input image, replacing specified colors with new colors.
 
@@ -57,7 +46,7 @@ def generate_image_from_template(template_image: ImageFile.ImageFile, old_colors
 
 
 def apply_template(template_config: dict, replacement_colors: list[RGBColor], src_dir: Path,
-        transpose: Transpose = None) -> Image.Image:
+                   transpose: Transpose = None) -> Image.Image:
     """
     Apply templating on an image with layers and color replacements.
 
@@ -157,10 +146,11 @@ def nine_slice_scale(image: Image.Image, left: int, top: int, right: int, bottom
 
 def slice_dict(bottom, height, width, left, right, top):
     return {"top_left": (0, 0, left, top), "top": (left, 0, width - right, top),
-        "top_right": (width - right, 0, width, top), "left": (0, top, left, height - bottom),
-        "center": (left, top, width - right, height - bottom), "right": (width - right, top, width, height - bottom),
-        "bottom_left": (0, height - bottom, left, height), "bottom": (left, height - bottom, width - right, height),
-        "bottom_right": (width - right, height - bottom, width, height), }
+            "top_right": (width - right, 0, width, top), "left": (0, top, left, height - bottom),
+            "center": (left, top, width - right, height - bottom),
+            "right": (width - right, top, width, height - bottom), "bottom_left": (0, height - bottom, left, height),
+            "bottom": (left, height - bottom, width - right, height),
+            "bottom_right": (width - right, height - bottom, width, height), }
 
 
 def make_transparent(image: Image.Image, factor: float) -> Image.Image:
