@@ -45,9 +45,9 @@
 		}
 	},
 	"3clr-frame-altbg": {
-		"description_name": "Frame-only Tricolor",
+		"description_name": "Frame-only Alt-BG Tricolor",
 		"explanation": "A simple tricolor flag with three colors. This style only applies the colors to the frame, leaving the background as the default Minecraft texture",
-		"version": 1,
+		"version": 2,
 		"expects": 3,
 		"background": {
 			"before": [
